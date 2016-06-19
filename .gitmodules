@@ -1,0 +1,3 @@
+[submodule "ooCMake"]
+	path = ooCMake
+	url = git@github.com:mensinda/ooCMake.git
