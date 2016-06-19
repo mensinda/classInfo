@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 project(classinfo)
 
-add_executable(classinfo test/main.cpp)
+add_subdirectory( ${CMAKE_CURRENT_SOURCE_DIR}/test )
 
-install(TARGETS classinfo RUNTIME DESTINATION bin)
