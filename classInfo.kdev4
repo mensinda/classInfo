@@ -1,0 +1,4 @@
+[Project]
+Name=classInfo
+Manager=KDevCMakeManager
+VersionControl=kdevgit
