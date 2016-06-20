@@ -27,7 +27,7 @@ class ClassA {
    int
    a; // Legal C++ code. And we have to support it
    int b = 5;
-   static const std::string CONST_STR = "String with a ';'";
+   const std::string CONST_STR = "String with a ';'";
    std::string str1;
 
  protected:
