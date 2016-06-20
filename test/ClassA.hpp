@@ -16,6 +16,7 @@
 
 #pragma once
 #include <stdint.h>
+#include <string>
 
 namespace test1 {
 
@@ -26,12 +27,14 @@ class ClassA {
    int
    a; // Legal C++ code. And we have to support it
    int b = 5;
+   static const std::string CONST_STR = "String with a ';'";
+   std::string str1;
 
  protected:
    int c = 0;
 
  public:
-   ClassA() : a( 10 ) {
+   ClassA() : a( 10 ), str1( "String ; str" ) {
    }
    ClassA( int _b ) : ClassA() {
       b = _b;
