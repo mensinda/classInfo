@@ -16,27 +16,44 @@
 
 #pragma once
 #include "ClassA.hpp"
-#include <stdint.h>
 #include <iostream>
+#include <stdint.h>
 
-namespace test1 {
+namespace // We can parse this but I hope nobody does something like this
+test1 {
 
-class [[deprecated]]
-ClassB
-:
-public base::ClassA {
+template <class C>
+class ClassC {
+ private:
+   C test4;
+
  public:
-   ClassB() = delete;
-   ClassB( int _b );
+   ClassC() = delete;
+   ClassC( C _b ) : test4(
+   _b
 
-   virtual uint32_t f2() override;
-   void             f3();
-   static void
-   [[deprecated]]
-   f4();
-   void doStuff( int b ) {
+   ) {}
+
+   template <class D>
+   void f3( uint32_t const *StufF );
+
+   static void f4();
+   void doStuff( int &b ) const {
       // Inline Function
       std::cout << "b: " << b << std::endl;
    }
+
+   static // C++ code parsing is so mauch fun
+   const
+   uint32_t *superLongFunc( const uint32_t *arg1,
+                            const uint32_t *arg2,
+                            const uint32_t *arg3 );
 };
+}
+
+template <
+class C>
+template <class D>
+void test1::ClassC<C>::f3( uint32_t const *StufF ) {
+   std::cout << sizeof( D ) << " " << sizeof( C ) << std::endl;
 }
