@@ -18,6 +18,7 @@
 #include "ClassA.hpp"
 #include <iostream>
 #include <stdint.h>
+#include <vector>
 
 namespace // We can parse this but I hope nobody does something like this
 test1 {
@@ -35,7 +36,7 @@ class ClassC {
    ) {}
 
    template <class D>
-   void f3( uint32_t const *StufF );
+   std::vector<std::string> f3( uint32_t const *StufF );
 
    static void f4();
    void doStuff( int &b ) const {
@@ -56,6 +57,6 @@ class ClassC {
 template <
 class C>
 template <class D>
-void test1::ClassC<C>::f3( uint32_t const *StufF ) {
+std::vector<std::string> test1::ClassC<C>::f3( uint32_t const *StufF ) {
    std::cout << sizeof( D ) << " " << sizeof( C ) << std::endl;
 }
