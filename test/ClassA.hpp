@@ -23,11 +23,21 @@ namespace test1 {
 namespace base {
 
 class ClassA {
- private:
-   int
+ public:
+   typedef
+   struct
+   ABC {
+      std::string something;
+   } ABCD;
+
+   typedef
+   std::string oi;
+
+
+ private:   int
    a; // Legal C++ code. And we have to support it
    int b = 5;
-   const std::string CONST_STR = "String with a ';'";
+   const std::string CONST_STR = "String with a '\";\"' char";
    std::string str1;
 
  protected:
@@ -50,6 +60,7 @@ class ClassA {
 
 void ClassA::defineInline() {
    // Do Fancy stuff
+   ABCD struc;
    if( true ) {
       // asd
    } else {

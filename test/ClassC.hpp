@@ -45,8 +45,10 @@ class ClassC {
 
    static // C++ code parsing is so mauch fun
    const
-   uint32_t *superLongFunc( const uint32_t *arg1,
-                            const uint32_t *arg2 = nullptr,
+   uint32_t *superLongFunc
+   ( const uint32_t *arg1,
+                            const uint32_t
+                            *arg2 = nullptr,
                             const uint32_t *arg3 = nullptr );
 };
 }
