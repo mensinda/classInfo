@@ -17,18 +17,26 @@ class( ClassInfo )
   private( FUNC removeFunctionImpl )
   private( FUNC removeHelpers )
 
+  public( FUNC ClassInfo )
+
+  private( FUNC process )
   public( FUNC parseFile )
+  public( FUNC print )
 endclass()
 
-function( ClassInfo__parseFile FILE )
+macro( ClassInfo__ClassInfo )
+  if( NOT COMMAND "root" )
+    new( Object root ROOT ROOT "ROOT" )
+  endif()
+endmacro()
+
+function( ClassInfo__process FILE )
   set( RE "!!END!!" )
   set( CM "!!COMMA!!" )
   set( AN "!!ANOTATION!!" )
   set( AB "!!ABSTRACT!!" )
 
   file( READ "${FILE}" RAW )
-
-  log( LEVEL1 "${FILE} START" )
 
   this( CALL removeAndFormat RAW )
   getReturn( WORKER )
@@ -38,11 +46,16 @@ function( ClassInfo__parseFile FILE )
 
   this( CALL removeHelpers WORKER )
   getReturn( WORKER )
-
-  foreach( I IN LISTS WORKER )
-    message( "${I}" )
-  endforeach()
-
-  log( LEVEL1 "${FILE} END" )
-  message( "" )
+  returnVal( "${WORKER}" )
 endfunction()
+
+macro( ClassInfo__parseFile FILE )
+  this( CALL process "${FILE}" )
+  getReturn( ClassInfo_DATA )
+
+  root( CALL parse ClassInfo_DATA 0 ClassInfo_VOID )
+endmacro()
+
+macro( ClassInfo__print )
+  root( CALL print )
+endmacro()
