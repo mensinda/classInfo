@@ -30,6 +30,19 @@ class ClassA {
       std::string something;
    } ABCD;
 
+   struct
+   AB {
+      std::string something;
+   } AAA
+   ;
+
+   union U1 {
+      int a[3];
+      int x;
+      int y;
+      int z;
+   };
+
    typedef
    std::string oi;
 
@@ -50,7 +63,7 @@ class ClassA {
       b = _b;
    }
 
-   //@! Test
+   //@! Test("String; a")
    void             f1();
    virtual uint32_t f2() = 0;
    void             f3();
