@@ -22,6 +22,7 @@ namespace test1 {
 
 namespace base {
 
+//@! AbstractClass
 class ClassA {
  public:
    typedef
@@ -36,7 +37,9 @@ class ClassA {
    } AAA
    ;
 
-   union U1 {
+   union
+   U1
+   {
       int a[3];
       int x;
       int y;
@@ -59,13 +62,17 @@ class ClassA {
  public:
    ClassA() : a( 10 ), str1( "String ; str" ) {
    }
+
+   //@! Prefered( true )
    ClassA( int _b ) : ClassA() {
       b = _b;
    }
 
    //@! Test("String; a")
    void             f1();
+   //@! Test("String; a")
    virtual uint32_t f2() = 0;
+   //@! Test("String; a")
    void             f3();
 
    inline void defineInline();

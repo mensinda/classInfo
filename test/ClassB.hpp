@@ -29,6 +29,7 @@ public base::ClassA {
    ClassB() = delete;
    ClassB( int _b );
 
+   //@! RegexTest( "Replacing? this [^1] with regex is $o much funn...*" )
    virtual uint32_t f2() override;
    void             f3();
    static void

@@ -18,6 +18,10 @@ if( COMMAND classInfo_init )
   return()
 endif()
 
+if( "${classInfo_ANNOTATION_START}" STREQUAL "" )
+  set( classInfo_ANNOTATION_START "//@!" )
+endif()
+
 macro( classInfo_log )
   debugMsg( classInfo_VERBOSE ${ARGN} )
 endmacro()
