@@ -13,9 +13,11 @@
 # limitations under the License.
 
 class( ClassInfo )
+  private( FUNC moveAnnotations )
   private( FUNC removeAndFormat )
   private( FUNC removeFunctionImpl )
   private( FUNC removeHelpers )
+  private( FUNC mergeAnnotations )
 
   public( FUNC ClassInfo )
 
@@ -31,14 +33,19 @@ macro( ClassInfo__ClassInfo )
 endmacro()
 
 function( ClassInfo__process FILE )
-  set( RE "!!END!!" )
-  set( CM "!!COMMA!!" )
-  set( AN "!!ANOTATION!!" )
-  set( AB "!!ABSTRACT!!" )
+  string( ASCII 27 ESC )
+  set( RE "${ESC}!!END!!" )
+  set( CM "${ESC}!!COMMA!!" )
+  set( AN "${ESC}!!ANOTATION!!" )
+  set( AB "${ESC}!!ABSTRACT!!" )
+  set( DL "${ESC}!!DELETED!!" )
 
   file( READ "${FILE}" RAW )
 
-  this( CALL removeAndFormat RAW )
+  this( CALL moveAnnotations RAW )
+  getReturn( ANNOTATIONS )
+
+  this( CALL removeAndFormat RAW ANNOTATIONS )
   getReturn( WORKER )
 
   this( CALL removeFunctionImpl WORKER )
@@ -46,6 +53,17 @@ function( ClassInfo__process FILE )
 
   this( CALL removeHelpers WORKER )
   getReturn( WORKER )
+
+  this( CALL mergeAnnotations WORKER ANNOTATIONS )
+  getReturn( WORKER )
+
+  if( ClassInfo_PRINT_FORMATED )
+    log( LEVEL2 "Parsed ${FILE}" )
+    foreach( I IN LISTS WORKER )
+      log( LEVEL3 "${I}" )
+    endforeach()
+  endif()
+
   returnVal( "${WORKER}" )
 endfunction()
 

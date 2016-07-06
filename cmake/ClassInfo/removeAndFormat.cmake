@@ -15,10 +15,11 @@
 function( ClassInfo__removeAndFormat INPUT )
   set( S  "[ \n\t]*" )
   set( ACC "(private|public|protected)" )
-  set( NO_BREAK "(typedef|struct|class)" )
+  set( NO_BREAK "(typedef|struct|class|union)" )
   string( REGEX REPLACE "\r"                        ""          WORKER "${${INPUT}}" ) # Remove Windows line breaks
   string( REGEX REPLACE "//@!"                      "\n${AN}"   WORKER "${WORKER}"   ) # Replace //@! with magic string
-  string( REGEX REPLACE "\\)${S}=${S}0${S};"        ") ${AB};"  WORKER "${WORKER}"   ) # Replace //@! with magic string
+  string( REGEX REPLACE "\\)${S}=${S}0${S};"        ") ${AB};"  WORKER "${WORKER}"   ) # Replace = 0
+  string( REGEX REPLACE "\\)${S}=${S}delete${S};"   ") ${DL};"  WORKER "${WORKER}"   ) # Replace = delete
   string( REGEX REPLACE "/\\*.*\\*/"                ""          WORKER "${WORKER}"   ) # Remove C-Style comments
   string( REGEX REPLACE "//[^\n]*\n"                "\n"        WORKER "${WORKER}"   ) # C++ comments
   string( REGEX REPLACE "${S}#[^\n]*\n"             ""          WORKER "${WORKER}"   ) # Remove Preprocessor
